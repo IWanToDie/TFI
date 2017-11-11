@@ -15,12 +15,12 @@ public class Mesa
 {
     private int numero;
     private boolean estado = false;
-    private ArrayList<Producto> listaProductos;
+    private ArrayList<Pedido> listaPedidos;
     
     public Mesa(int numero)
     {
         this.numero = numero;
-        listaProductos = new ArrayList<>();
+        listaPedidos = new ArrayList<>();
     }
 
     public int getNumero() {
@@ -39,16 +39,18 @@ public class Mesa
         this.estado = estado;
     }
 
-    public ArrayList<Producto> getListaProductos() {
-        return listaProductos;
-    }
-
-    public void setListaProductos(ArrayList<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
-    }
-    public void agregarProducto(Producto p)
+    public void agregarPedido(Pedido p)
     {
-        listaProductos.add(p);
+        listaPedidos.add(p);
+    }
+    public double calcularTotal()
+    {
+        double total = 0;
+        for(Pedido p: listaPedidos)
+        {
+            total += p.getTotal();
+        }
+        return total;
     }
     
 }
