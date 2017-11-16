@@ -5,17 +5,21 @@
  */
 package Vistas;
 
+import Modelo.ControladorRegistrarPedido;
+import Modelo.IVentanaPedido;
+
 /**
  *
  * @author Ignacio Alvarez
  */
-public class VentanaPrincipal extends javax.swing.JFrame {
+public class VentanaPrincipal extends javax.swing.JFrame implements IVentanaPedido{
 
-    /**
-     * Creates new form VentanaPrincipal
-     */
+    private ControladorRegistrarPedido controlador;
+    
     public VentanaPrincipal() 
     {
+        controlador = new ControladorRegistrarPedido();
+        controlador.setVentana(this);
         initComponents();
     }
 
@@ -29,112 +33,103 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         panelAyuda = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAyuda = new javax.swing.JTextArea();
         panelBotones = new javax.swing.JPanel();
+        btnVentanPedido = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        btnVentanPedido = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setExtendedState(MAXIMIZED_BOTH);
+        setSize(new java.awt.Dimension(0, 0));
+        getContentPane().setLayout(new java.awt.GridLayout(0, 1));
 
-        panelAyuda.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelAyuda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        txtAyuda.setColumns(20);
+        txtAyuda.setRows(5);
+        txtAyuda.setEnabled(false);
+        jScrollPane1.setViewportView(txtAyuda);
 
         javax.swing.GroupLayout panelAyudaLayout = new javax.swing.GroupLayout(panelAyuda);
         panelAyuda.setLayout(panelAyudaLayout);
         panelAyudaLayout.setHorizontalGroup(
             panelAyudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
         );
         panelAyudaLayout.setVerticalGroup(
             panelAyudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 153, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
         );
 
-        jButton2.setText("jButton1");
+        getContentPane().add(panelAyuda);
 
-        jButton3.setText("jButton1");
+        panelBotones.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton4.setText("jButton1");
-
+        btnVentanPedido.setMnemonic('p');
         btnVentanPedido.setText("Pedidos");
+        btnVentanPedido.setToolTipText("Menu de Pedidos");
         btnVentanPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVentanPedidoActionPerformed(evt);
             }
         });
+        panelBotones.add(btnVentanPedido);
 
-        javax.swing.GroupLayout panelBotonesLayout = new javax.swing.GroupLayout(panelBotones);
-        panelBotones.setLayout(panelBotonesLayout);
-        panelBotonesLayout.setHorizontalGroup(
-            panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBotonesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnVentanPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        panelBotonesLayout.setVerticalGroup(
-            panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBotonesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                    .addComponent(btnVentanPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        jButton2.setText("jButton1");
+        panelBotones.add(jButton2);
+
+        jButton3.setText("jButton1");
+        panelBotones.add(jButton3);
+
+        jButton4.setText("jButton1");
+        panelBotones.add(jButton4);
+
+        getContentPane().add(panelBotones);
 
         jMenu.setText("Sistema");
 
         jMenuItem1.setText("Acerca de...");
         jMenu.add(jMenuItem1);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem2.setText("Salir");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu.add(jMenuItem2);
 
         jMenuBar1.add(jMenu);
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
-                .addComponent(panelAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVentanPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentanPedidoActionPerformed
         // TODO add your handling code here:
-        VentanaPedidos vp = new VentanaPedidos();
-        vp.setVisible(true);
+
+        if(VentanaPedidos.isBandera())
+        {
+            VentanaPedidos vp = new VentanaPedidos();
+            vp.setVisible(true);  
+        }
+        
     }//GEN-LAST:event_btnVentanPedidoActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     
 
@@ -147,7 +142,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelAyuda;
     private javax.swing.JPanel panelBotones;
+    private javax.swing.JTextArea txtAyuda;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setControlador(ControladorRegistrarPedido control) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

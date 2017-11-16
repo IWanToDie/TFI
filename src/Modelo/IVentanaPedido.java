@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controladores;
+package Modelo;
 
 /**
  *
  * @author Ignacio Alvarez
  */
-public class ControladorRegistrarPedido {
-    
+public interface IVentanaPedido 
+{
+    void setControlador(ControladorRegistrarPedido control);
 }

@@ -5,18 +5,24 @@
  */
 package Vistas;
 
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Ignacio Alvarez
  */
-public class VentanaPedidos extends javax.swing.JFrame {
-
-    /**
-     * Creates new form VentanaNuevoPedido
-     */
+public class VentanaPedidos extends javax.swing.JFrame 
+{
+    private static boolean bandera = true;
+    private DefaultTableModel modelo;
+    
     public VentanaPedidos() 
     {
         initComponents();
+        bandera = false;
+        setModeloTabla();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -44,6 +50,11 @@ public class VentanaPedidos extends javax.swing.JFrame {
         btnAyuda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel1.setText("Pedidos");
@@ -79,6 +90,11 @@ public class VentanaPedidos extends javax.swing.JFrame {
         btnRefrescar.setText("Refrescar");
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Opciones");
 
@@ -158,9 +174,28 @@ public class VentanaPedidos extends javax.swing.JFrame {
 
     private void btnNuevoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPedidoActionPerformed
         // TODO add your handling code here:
-        VentanaNuevoPedido vnp = new VentanaNuevoPedido(this, true);
-        vnp.setVisible(true);
+            VentanaNuevoPedido vnp = new VentanaNuevoPedido(this, true);
+            vnp.setVisible(true);                      
     }//GEN-LAST:event_btnNuevoPedidoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        bandera = true;
+    }//GEN-LAST:event_formWindowClosed
+
+    public static boolean isBandera() {
+        return bandera;
+    }
+
+    public static void setBandera(boolean bandera) {
+        VentanaPedidos.bandera = bandera;
+    }
 
     
 
@@ -180,4 +215,35 @@ public class VentanaPedidos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
+
+    public void setModeloTabla()
+    {
+        String[] columnas = {
+            "Id", "Mesa", "Mozo", "Fecha","Estado"
+        };
+        final Class[] columnClass = new Class[] 
+        {
+            Integer.class,Integer.class, String.class, Date.class, Boolean.class
+        };
+        modelo = new DefaultTableModel(null, columnas) 
+        {
+            @Override
+            public boolean isCellEditable(int row, int column)
+            {
+                return false;
+            }
+            @Override
+            public Class<?> getColumnClass(int columnIndex)
+            {
+                return columnClass[columnIndex];
+            }
+        };
+        TablaPedido.setModel(modelo);
+    }
+    
+    public void cargar(int id,int numeroMesa,String nombreMozo,Date fecha,boolean estado)
+    {
+        modelo.addRow(new Object[]{id,numeroMesa,nombreMozo,fecha,estado});
+    }
+
 }

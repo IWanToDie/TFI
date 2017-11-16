@@ -18,12 +18,14 @@ public class Pedido
     private Mesa mesa;
     private ArrayList<Producto> listaProductos;
     private Date fecha;
+    private boolean estado;// private EstadoPedido estado;
 
     public Pedido(Mozo mozo, Mesa mesa) {
         this.mozo = mozo;
         this.mesa = mesa;
         listaProductos = new ArrayList<>();
         fecha = new Date();
+        estado = false;
     }
 
     public Mozo getMozo() {
@@ -57,9 +59,14 @@ public class Pedido
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    
-    
-    
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
     public double getTotal()
     {
         double total = 0;

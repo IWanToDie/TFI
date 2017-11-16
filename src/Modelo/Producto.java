@@ -15,9 +15,9 @@ public class Producto
     private String descripcion;
     private double precio; 
 
-    public Producto(String descripcion, double precio)
+    public Producto(int id,String descripcion, double precio)
     {
-        id++;
+        this.id = id;
         this.descripcion = descripcion;
         this.precio = precio;
     }
