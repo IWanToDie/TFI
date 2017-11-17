@@ -16,16 +16,14 @@ public class Pedido
 {
     private Mozo mozo;
     private Mesa mesa;
-    private ArrayList<Producto> listaProductos;
+    private ArrayList<LineaPedido> listaLineaPedido;
     private Date fecha;
-    private boolean estado;// private EstadoPedido estado;
 
     public Pedido(Mozo mozo, Mesa mesa) {
         this.mozo = mozo;
         this.mesa = mesa;
-        listaProductos = new ArrayList<>();
+        listaLineaPedido = new ArrayList<>();
         fecha = new Date();
-        estado = false;
     }
 
     public Mozo getMozo() {
@@ -44,12 +42,12 @@ public class Pedido
         this.mesa = mesa;
     }
 
-    public ArrayList<Producto> getListaProductos() {
-        return listaProductos;
+    public ArrayList<LineaPedido> getListaProductos() {
+        return listaLineaPedido;
     }
 
-    public void setListaProductos(ArrayList<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
+    public void setListaProductos(ArrayList<LineaPedido> listaProductos) {
+        this.listaLineaPedido = listaProductos;
     }
 
     public Date getFecha() {
@@ -60,20 +58,18 @@ public class Pedido
         this.fecha = fecha;
     }
 
-    public boolean isEstado() {
-        return estado;
-    }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
     public double getTotal()
     {
         double total = 0;
-        for(Producto p: listaProductos)
+        for(LineaPedido p: listaLineaPedido)
         {
-            total += p.getPrecio();
+            total += p.getTotal();
         }
         return total;
+    }
+    public void agregarProducto(LineaPedido p)
+    {
+        listaLineaPedido.add(p);
     }
 }

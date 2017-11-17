@@ -6,6 +6,7 @@
 package Datos;
 
 import Modelo.Producto;
+import java.util.List;
 
 /**
  *
@@ -13,6 +14,7 @@ import Modelo.Producto;
  */
 public interface ProductoDao 
 {
+    public List<Producto> getTodosProducto();
     public void insert(Producto product);
     public void update(Producto product);
     public void delete(Integer id);

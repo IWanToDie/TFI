@@ -8,41 +8,25 @@ package Datos;
 import Modelo.Producto;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
  * @author Ignacio Alvarez
  */
 public class ProductoDaoMySQL implements ProductoDao 
-{
-
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/tfi";
-    static final String DB_USER = "root";
-    static final String DB_PASS = "";
-
-    private void registrarDriver() {
-        try {
-            Class.forName(JDBC_DRIVER).newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            System.err.println("ERROR: failed to load HSQLDB JDBC driver.");
-            e.printStackTrace();
-        }
-    }
-
+{    
     @Override
     public void delete(Integer id) 
     {
         Connection conn = null;
         try {
-            registrarDriver();
-            conn = (Connection) DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            conn = ConexionMySQL.getInstancia().getConexion();
             try (Statement stmt = (Statement) conn.createStatement()) {
-                stmt.executeUpdate("delete from product where id = " + id + ";");
+                stmt.executeUpdate("delete from producto where id = " + id + ";");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -61,8 +45,7 @@ public class ProductoDaoMySQL implements ProductoDao
     public void insert(Producto producto) {
         Connection conn = null;
         try {
-            registrarDriver(); 
-            conn = (Connection) DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            conn = ConexionMySQL.getInstancia().getConexion();
             try (Statement stmt = (Statement) conn.createStatement()) {
                 stmt.executeUpdate("insert into product values ("
                         + producto.getId() + ",'"
@@ -95,8 +78,7 @@ public class ProductoDaoMySQL implements ProductoDao
         Producto producto = null;
 
         try {
-            registrarDriver();
-            conn = (Connection) DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            conn = ConexionMySQL.getInstancia().getConexion();
             try (PreparedStatement ps = conn.prepareStatement(
                     "select * from product where id = ?")) 
             {
@@ -123,6 +105,11 @@ public class ProductoDaoMySQL implements ProductoDao
             }
         }
         return producto;
+    }
+
+    @Override
+    public List<Producto> getTodosProducto() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 
