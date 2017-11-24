@@ -11,39 +11,21 @@ package Modelo;
  */
 public class LineaPedido 
 {
-    private Producto producto;
+    private IVendible vendible;
     private int cantidad;
-    private String caracteristica;
 
-    public LineaPedido(Producto producto, int cantidad) 
+    public LineaPedido(IVendible vendible, int cantidad) 
     {
-        this.producto = producto;
+        this.vendible = vendible;
         this.cantidad = cantidad;
-        this.caracteristica = null;
     }
 
-    public LineaPedido(Producto producto, String caracteristica) 
-    {
-        this.producto = producto;
-        this.caracteristica = caracteristica;
-        this.cantidad = 1;
-    }
-    
-
-    public Producto getProducto() {
-        return producto;
+    public IVendible getVendible() {
+        return vendible;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
-    public String getCaracteristica() {
-        return caracteristica;
-    }
-
-    public void setCaracteristica(String caracteristica) {
-        this.caracteristica = caracteristica;
+    public void setVendible(IVendible vendible) {
+        this.vendible = vendible;
     }
 
     public int getCantidad() {
@@ -56,6 +38,8 @@ public class LineaPedido
     
     public double getTotal()
     {
-        return producto.getPrecio() * cantidad;
+        if(vendible != null)
+            return vendible.calcularPrecio() * cantidad;
+        return 0;
     }
 }

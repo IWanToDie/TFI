@@ -52,5 +52,9 @@ public class Mesa
         }
         return total;
     }
+    private void cerrarMesa()
+    {
+        
+    }
     
 }

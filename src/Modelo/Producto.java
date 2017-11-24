@@ -5,21 +5,27 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ignacio Alvarez
  */
-public class Producto 
+public class Producto implements IVendible
 {
     private int id;
     private String descripcion;
-    private double precio; 
+    private double precio;
+    private ArrayList<Producto> listaAgregados;
+    private boolean esAgregado;
 
-    public Producto(int id,String descripcion, double precio)
+    public Producto(int id,String descripcion, double precio,boolean esAgregado)
     {
         this.id = id;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.esAgregado = esAgregado;
+        listaAgregados = new ArrayList<>();
     }
     
     
@@ -47,6 +53,39 @@ public class Producto
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+    @Override
+    public void agregarProducto(Producto p)
+    {
+        if((p != null) && p.isEsAgregado() && !this.isEsAgregado())
+            this.listaAgregados.add(p);
+    }
+    @Override
+    public double calcularPrecio()
+    {
+        double total = this.precio;
+        for(Producto p: listaAgregados)
+        {
+            total += p.calcularPrecio();
+        }
+        return total;
+    }
+
+    public ArrayList<Producto> getListaAgregados() {
+        return listaAgregados;
+    }
+
+    public void setListaAgregados(ArrayList<Producto> listaAgregados) {
+        this.listaAgregados = listaAgregados;
+    }
+
+    public boolean isEsAgregado() {
+        return esAgregado;
+    }
+
+    public void setEsAgregado(boolean esAgregado) {
+        this.esAgregado = esAgregado;
+    }
+    
     
     
 }
