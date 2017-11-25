@@ -9,7 +9,7 @@ package Modelo;
  *
  * @author Ignacio Alvarez
  */
-interface IVendible 
+public interface IVendible 
 {
      double calcularPrecio();
      void agregarProducto(Producto p);

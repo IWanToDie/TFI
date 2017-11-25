@@ -5,8 +5,6 @@
  */
 package Modelo;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Ignacio Alvarez
@@ -15,18 +13,26 @@ public class Mesa
 {
     private int numero;
     private boolean estado = false;
-    private ArrayList<Pedido> listaPedidos;
+    private Pedido pedido;
     
     public Mesa(int numero)
     {
         this.numero = numero;
-        listaPedidos = new ArrayList<>();
     }
 
+    public void iniciarMesa(Pedido pedido)
+    {
+        estado = true;
+        this.pedido = pedido;
+    }
+    public double cerrarMesa()
+    {
+        estado = false;
+        return pedido.getTotal();
+    }
     public int getNumero() {
         return numero;
     }
-
     public void setNumero(int numero) {
         this.numero = numero;
     }
@@ -39,22 +45,12 @@ public class Mesa
         this.estado = estado;
     }
 
-    public void agregarPedido(Pedido p)
-    {
-        listaPedidos.add(p);
+    public Pedido getPedido() {
+        return pedido;
     }
-    public double calcularTotal()
-    {
-        double total = 0;
-        for(Pedido p: listaPedidos)
-        {
-            total += p.getTotal();
-        }
-        return total;
-    }
-    private void cerrarMesa()
-    {
-        
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
     
 }

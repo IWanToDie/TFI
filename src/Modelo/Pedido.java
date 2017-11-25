@@ -19,13 +19,34 @@ public class Pedido
     private ArrayList<LineaPedido> listaLineaPedido;
     private Date fecha;
 
-    public Pedido(Mozo mozo, Mesa mesa) {
+    public Pedido(Mozo mozo, Mesa mesa) 
+    {
         this.mozo = mozo;
         this.mesa = mesa;
         listaLineaPedido = new ArrayList<>();
         fecha = new Date();
     }
+    public Pedido(Mesa mesa)
+    {
+        this.mesa = mesa;
+        listaLineaPedido = new ArrayList<>();
+        fecha = new Date();
+    }
 
+        public double getTotal()
+    {
+        double total = 0;
+        for(LineaPedido p: listaLineaPedido)
+        {
+            total += p.getTotal();
+        }
+        return total;
+    }
+    public void agregarLineaPedido(LineaPedido lp)
+    {
+        if(lp!=null)
+            listaLineaPedido.add(lp);
+    }
     public Mozo getMozo() {
         return mozo;
     }
@@ -57,19 +78,6 @@ public class Pedido
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
-
-    public double getTotal()
-    {
-        double total = 0;
-        for(LineaPedido p: listaLineaPedido)
-        {
-            total += p.getTotal();
-        }
-        return total;
-    }
-    public void agregarProducto(LineaPedido p)
-    {
-        listaLineaPedido.add(p);
-    }
 }
+
+

@@ -72,7 +72,7 @@ public class Promocion implements IVendible
     @Override
     public void agregarProducto(Producto p)
     {
-        if((p != null))
+        if((p != null) && (p.isEsAgregado() == false))
             this.listaProductos.add(p);
     }
     

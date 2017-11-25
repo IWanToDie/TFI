@@ -86,5 +86,18 @@ public class TestLineaPedido {
         
         assertEquals(0, lineaPedido.getTotal() ,0.05);
     }
+    @Test
+    public void calcularTotal6()
+    {
+        Producto p1 = new Producto(0, "milanesa", 50, false);
+        Producto agregado1 = new Producto(0, "agregado1", 15, true);
+        Producto agregado2 = new Producto(0, "agregado2", 15, true);
+        p1.agregarProducto(agregado2);
+        p1.agregarProducto(agregado1);
+        
+        LineaPedido lineaPedido = new LineaPedido(p1, 0);
+        
+        assertEquals(0, lineaPedido.getTotal() ,0.05);
+    }
     
 }

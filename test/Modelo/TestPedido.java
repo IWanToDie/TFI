@@ -21,9 +21,38 @@ public class TestPedido
     {
         Pedido pedido = new Pedido(new Mozo("nombre", "apellido"), new Mesa(1));
         
-
+        pedido.agregarLineaPedido(null);
         
-        assertEquals(100.50, pedido.getTotal(),0.1);
+        assertEquals(0, pedido.getTotal(),0.05);
+    }
+    
+    @Test
+    public void getTotal1()
+    {
+        Pedido pedido = new Pedido(new Mesa(1));
+        Promocion promocion = new Promocion(1, "promocion 1", 0.9);
+        Producto producto = new Producto(0, "milanesa", 45, false);
+        Producto agregado = new Producto(1, "agregado", 5, true);
+        producto.agregarProducto(agregado);
+        promocion.agregarProducto(producto);
+        LineaPedido lineaPedido = new LineaPedido(promocion, 2);
+        
+        pedido.agregarLineaPedido(lineaPedido);
+        
+        assertEquals(90, pedido.getTotal(),0.05);
+    }
+    @Test
+    public void getTotal2()
+    {
+        Pedido pedido = new Pedido(new Mesa(1));
+        Promocion promocion = new Promocion(1, "promocion 1", 1);
+        Producto agregado = new Producto(1, "agregado", 5, true);
+        promocion.agregarProducto(agregado);
+        LineaPedido lineaPedido = new LineaPedido(promocion, 1);
+        
+        pedido.agregarLineaPedido(lineaPedido);
+        
+        assertEquals(0, pedido.getTotal(),0.05);
     }
     
     

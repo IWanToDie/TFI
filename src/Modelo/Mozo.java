@@ -11,7 +11,7 @@ package Modelo;
  */
 public class Mozo 
 {
-    private static int id;
+    private int id;
     private String nombre;
     private String apellido;
 
@@ -19,7 +19,6 @@ public class Mozo
     {
         this.nombre = nombre;
         this.apellido = apellido;
-        id++;
     }
 
     
