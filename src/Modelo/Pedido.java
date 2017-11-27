@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Ignacio Alvarez
  */
-public class Pedido 
+public class Pedido  
 {
     private Mozo mozo;
     private Mesa mesa;
