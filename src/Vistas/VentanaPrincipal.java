@@ -37,9 +37,9 @@ public class VentanaPrincipal extends javax.swing.JFrame implements IVentanaPedi
         txtAyuda = new javax.swing.JTextArea();
         panelBotones = new javax.swing.JPanel();
         btnVentanPedido = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnCatalogoPedido = new javax.swing.JButton();
+        btnMesasPedido = new javax.swing.JButton();
+        btnEmpleadosPedido = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -55,6 +55,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements IVentanaPedi
 
         txtAyuda.setColumns(20);
         txtAyuda.setRows(5);
+        txtAyuda.setText("ALT+S : SALIR DEL PROGRAMA\t\tALT+P : MENU VENTAS\n\nALT+C : MENU CATALOGO\t\t\tALT+M : MENU MESAS\n\nALT+E : MENU EMPLEADOS\t\t\tALT+A : AYUDA");
         txtAyuda.setEnabled(false);
         jScrollPane1.setViewportView(txtAyuda);
 
@@ -74,7 +75,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements IVentanaPedi
         panelBotones.setLayout(new java.awt.GridLayout(1, 0));
 
         btnVentanPedido.setMnemonic('p');
-        btnVentanPedido.setText("Pedidos");
+        btnVentanPedido.setText("Ventas");
         btnVentanPedido.setToolTipText("Menu de Pedidos");
         btnVentanPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,14 +84,19 @@ public class VentanaPrincipal extends javax.swing.JFrame implements IVentanaPedi
         });
         panelBotones.add(btnVentanPedido);
 
-        jButton2.setText("jButton1");
-        panelBotones.add(jButton2);
+        btnCatalogoPedido.setText("Catalogo");
+        panelBotones.add(btnCatalogoPedido);
 
-        jButton3.setText("jButton1");
-        panelBotones.add(jButton3);
+        btnMesasPedido.setText("Mesas");
+        btnMesasPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMesasPedidoActionPerformed(evt);
+            }
+        });
+        panelBotones.add(btnMesasPedido);
 
-        jButton4.setText("jButton1");
-        panelBotones.add(jButton4);
+        btnEmpleadosPedido.setText("Empleados");
+        panelBotones.add(btnEmpleadosPedido);
 
         getContentPane().add(panelBotones);
 
@@ -131,13 +137,18 @@ public class VentanaPrincipal extends javax.swing.JFrame implements IVentanaPedi
         dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void btnMesasPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasPedidoActionPerformed
+        VentanaMesas vm = new VentanaMesas();
+        vm.setVisible(true);
+    }//GEN-LAST:event_btnMesasPedidoActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCatalogoPedido;
+    private javax.swing.JButton btnEmpleadosPedido;
+    private javax.swing.JButton btnMesasPedido;
     private javax.swing.JButton btnVentanPedido;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JMenu jMenu;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
